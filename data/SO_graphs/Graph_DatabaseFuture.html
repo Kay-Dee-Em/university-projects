@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Cassandra", "label": "Cassandra", "shape": "dot", "size": 5, "title": "Cassandra | Degree 5"}, {"font": {"color": "white"}, "id": "Elasticsearch", "label": "Elasticsearch", "shape": "dot", "size": 10, "title": "Elasticsearch | Degree 10"}, {"font": {"color": "white"}, "id": "MongoDB", "label": "MongoDB", "shape": "dot", "size": 12, "title": "MongoDB | Degree 12"}, {"font": {"color": "white"}, "id": "MySQL", "label": "MySQL", "shape": "dot", "size": 12, "title": "MySQL | Degree 12"}, {"font": {"color": "white"}, "id": "PostgreSQL", "label": "PostgreSQL", "shape": "dot", "size": 12, "title": "PostgreSQL | Degree 12"}, {"font": {"color": "white"}, "id": "Redis", "label": "Redis", "shape": "dot", "size": 10, "title": "Redis | Degree 10"}, {"font": {"color": "white"}, "id": "DynamoDB", "label": "DynamoDB", "shape": "dot", "size": 5, "title": "DynamoDB | Degree 5"}, {"font": {"color": "white"}, "id": "Firebase", "label": "Firebase", "shape": "dot", "size": 8, "title": "Firebase | Degree 8"}, {"font": {"color": "white"}, "id": "MariaDB", "label": "MariaDB", "shape": "dot", "size": 7, "title": "MariaDB | Degree 7"}, {"font": {"color": "white"}, "id": "Microsoft SQL Server", "label": "Microsoft SQL Server", "shape": "dot", "size": 8, "title": "Microsoft SQL Server | Degree 8"}, {"font": {"color": "white"}, "id": "SQLite", "label": "SQLite", "shape": "dot", "size": 9, "title": "SQLite | Degree 9"}, {"font": {"color": "white"}, "id": "Microsoft Azure Tables, CosmosDB, SQL, etc", "label": "Microsoft Azure Tables, CosmosDB, SQL, etc", "shape": "dot", "size": 1, "title": "Microsoft Azure Tables, CosmosDB, SQL, etc | Degree 1"}, {"font": {"color": "white"}, "id": "SQL Server", "label": "SQL Server", "shape": "dot", "size": 4, "title": "SQL Server | Degree 4"}, {"font": {"color": "white"}, "id": "Oracle", "label": "Oracle", "shape": "dot", "size": 5, "title": "Oracle | Degree 5"}]);
+        edges = new vis.DataSet([{"from": "Cassandra", "title": "Cassandra | Elasticsearch | Weight 10435", "to": "Elasticsearch", "value": 10435}, {"from": "Cassandra", "title": "Cassandra | MongoDB | Weight 12123", "to": "MongoDB", "value": 12123}, {"from": "Cassandra", "title": "Cassandra | MySQL | Weight 7694", "to": "MySQL", "value": 7694}, {"from": "Cassandra", "title": "Cassandra | PostgreSQL | Weight 10975", "to": "PostgreSQL", "value": 10975}, {"from": "Cassandra", "title": "Cassandra | Redis | Weight 11512", "to": "Redis", "value": 11512}, {"from": "Elasticsearch", "title": "Elasticsearch | DynamoDB | Weight 7886", "to": "DynamoDB", "value": 7886}, {"from": "Elasticsearch", "title": "Elasticsearch | Firebase | Weight 7993", "to": "Firebase", "value": 7993}, {"from": "Elasticsearch", "title": "Elasticsearch | MariaDB | Weight 9380", "to": "MariaDB", "value": 9380}, {"from": "Elasticsearch", "title": "Elasticsearch | Microsoft SQL Server | Weight 6939", "to": "Microsoft SQL Server", "value": 6939}, {"from": "Elasticsearch", "title": "Elasticsearch | MongoDB | Weight 23298", "to": "MongoDB", "value": 23298}, {"from": "Elasticsearch", "title": "Elasticsearch | MySQL | Weight 17854", "to": "MySQL", "value": 17854}, {"from": "Elasticsearch", "title": "Elasticsearch | PostgreSQL | Weight 25632", "to": "PostgreSQL", "value": 25632}, {"from": "Elasticsearch", "title": "Elasticsearch | Redis | Weight 26781", "to": "Redis", "value": 26781}, {"from": "Elasticsearch", "title": "Elasticsearch | SQLite | Weight 10290", "to": "SQLite", "value": 10290}, {"from": "MongoDB", "title": "MongoDB | DynamoDB | Weight 7793", "to": "DynamoDB", "value": 7793}, {"from": "MongoDB", "title": "MongoDB | Firebase | Weight 15901", "to": "Firebase", "value": 15901}, {"from": "MongoDB", "title": "MongoDB | MariaDB | Weight 14286", "to": "MariaDB", "value": 14286}, {"from": "MongoDB", "title": "MongoDB | Microsoft SQL Server | Weight 11911", "to": "Microsoft SQL Server", "value": 11911}, {"from": "MongoDB", "title": "MongoDB | MySQL | Weight 37691", "to": "MySQL", "value": 37691}, {"from": "MongoDB", "title": "MongoDB | Oracle | Weight 10036", "to": "Oracle", "value": 10036}, {"from": "MongoDB", "title": "MongoDB | PostgreSQL | Weight 34811", "to": "PostgreSQL", "value": 34811}, {"from": "MongoDB", "title": "MongoDB | Redis | Weight 30113", "to": "Redis", "value": 30113}, {"from": "MongoDB", "title": "MongoDB | SQL Server | Weight 7676", "to": "SQL Server", "value": 7676}, {"from": "MongoDB", "title": "MongoDB | SQLite | Weight 20413", "to": "SQLite", "value": 20413}, {"from": "MySQL", "title": "MySQL | DynamoDB | Weight 6074", "to": "DynamoDB", "value": 6074}, {"from": "MySQL", "title": "MySQL | Firebase | Weight 13471", "to": "Firebase", "value": 13471}, {"from": "MySQL", "title": "MySQL | MariaDB | Weight 19729", "to": "MariaDB", "value": 19729}, {"from": "MySQL", "title": "MySQL | Microsoft SQL Server | Weight 13595", "to": "Microsoft SQL Server", "value": 13595}, {"from": "MySQL", "title": "MySQL | Oracle | Weight 13284", "to": "Oracle", "value": 13284}, {"from": "MySQL", "title": "MySQL | PostgreSQL | Weight 32719", "to": "PostgreSQL", "value": 32719}, {"from": "MySQL", "title": "MySQL | Redis | Weight 23613", "to": "Redis", "value": 23613}, {"from": "MySQL", "title": "MySQL | SQL Server | Weight 9558", "to": "SQL Server", "value": 9558}, {"from": "MySQL", "title": "MySQL | SQLite | Weight 27306", "to": "SQLite", "value": 27306}, {"from": "PostgreSQL", "title": "PostgreSQL | DynamoDB | Weight 8250", "to": "DynamoDB", "value": 8250}, {"from": "PostgreSQL", "title": "PostgreSQL | Firebase | Weight 11707", "to": "Firebase", "value": 11707}, {"from": "PostgreSQL", "title": "PostgreSQL | MariaDB | Weight 13749", "to": "MariaDB", "value": 13749}, {"from": "PostgreSQL", "title": "PostgreSQL | Microsoft SQL Server | Weight 11112", "to": "Microsoft SQL Server", "value": 11112}, {"from": "PostgreSQL", "title": "PostgreSQL | Oracle | Weight 9094", "to": "Oracle", "value": 9094}, {"from": "PostgreSQL", "title": "PostgreSQL | Redis | Weight 37550", "to": "Redis", "value": 37550}, {"from": "PostgreSQL", "title": "PostgreSQL | SQL Server | Weight 5594", "to": "SQL Server", "value": 5594}, {"from": "PostgreSQL", "title": "PostgreSQL | SQLite | Weight 26508", "to": "SQLite", "value": 26508}, {"from": "Redis", "title": "Redis | DynamoDB | Weight 7889", "to": "DynamoDB", "value": 7889}, {"from": "Redis", "title": "Redis | Firebase | Weight 9082", "to": "Firebase", "value": 9082}, {"from": "Redis", "title": "Redis | MariaDB | Weight 11337", "to": "MariaDB", "value": 11337}, {"from": "Redis", "title": "Redis | Microsoft SQL Server | Weight 8303", "to": "Microsoft SQL Server", "value": 8303}, {"from": "Redis", "title": "Redis | SQLite | Weight 15821", "to": "SQLite", "value": 15821}, {"from": "Firebase", "title": "Firebase | MariaDB | Weight 5501", "to": "MariaDB", "value": 5501}, {"from": "Firebase", "title": "Firebase | Microsoft SQL Server | Weight 5809", "to": "Microsoft SQL Server", "value": 5809}, {"from": "Firebase", "title": "Firebase | SQLite | Weight 10463", "to": "SQLite", "value": 10463}, {"from": "MariaDB", "title": "MariaDB | SQLite | Weight 10648", "to": "SQLite", "value": 10648}, {"from": "Microsoft SQL Server", "title": "Microsoft SQL Server | Oracle | Weight 6344", "to": "Oracle", "value": 6344}, {"from": "Microsoft SQL Server", "title": "Microsoft SQL Server | SQLite | Weight 10702", "to": "SQLite", "value": 10702}, {"from": "SQLite", "title": "SQLite | Oracle | Weight 7705", "to": "Oracle", "value": 7705}, {"from": "Microsoft Azure Tables, CosmosDB, SQL, etc", "title": "Microsoft Azure Tables, CosmosDB, SQL, etc | SQL Server | Weight 5052", "to": "SQL Server", "value": 5052}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

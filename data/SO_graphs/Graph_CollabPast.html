@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Android Studio", "label": "Android Studio", "shape": "dot", "size": 6, "title": "Android Studio | Degree 6"}, {"font": {"color": "white"}, "id": "Eclipse", "label": "Eclipse", "shape": "dot", "size": 5, "title": "Eclipse | Degree 5"}, {"font": {"color": "white"}, "id": "IntelliJ", "label": "IntelliJ", "shape": "dot", "size": 8, "title": "IntelliJ | Degree 8"}, {"font": {"color": "white"}, "id": "NotepadPP", "label": "NotepadPP", "shape": "dot", "size": 8, "title": "NotepadPP | Degree 8"}, {"font": {"color": "white"}, "id": "Sublime Text", "label": "Sublime Text", "shape": "dot", "size": 7, "title": "Sublime Text | Degree 7"}, {"font": {"color": "white"}, "id": "Visual Studio", "label": "Visual Studio", "shape": "dot", "size": 8, "title": "Visual Studio | Degree 8"}, {"font": {"color": "white"}, "id": "Visual Studio Code", "label": "Visual Studio Code", "shape": "dot", "size": 11, "title": "Visual Studio Code | Degree 11"}, {"font": {"color": "white"}, "id": "Atom", "label": "Atom", "shape": "dot", "size": 1, "title": "Atom | Degree 1"}, {"font": {"color": "white"}, "id": "Confluence", "label": "Confluence", "shape": "dot", "size": 7, "title": "Confluence | Degree 7"}, {"font": {"color": "white"}, "id": "Github", "label": "Github", "shape": "dot", "size": 8, "title": "Github | Degree 8"}, {"font": {"color": "white"}, "id": "Gitlab", "label": "Gitlab", "shape": "dot", "size": 6, "title": "Gitlab | Degree 6"}, {"font": {"color": "white"}, "id": "Google Suite Docs, Meet, etc", "label": "Google Suite Docs, Meet, etc", "shape": "dot", "size": 7, "title": "Google Suite Docs, Meet, etc | Degree 7"}, {"font": {"color": "white"}, "id": "Jira", "label": "Jira", "shape": "dot", "size": 7, "title": "Jira | Degree 7"}, {"font": {"color": "white"}, "id": "Microsoft Teams", "label": "Microsoft Teams", "shape": "dot", "size": 5, "title": "Microsoft Teams | Degree 5"}, {"font": {"color": "white"}, "id": "Slack", "label": "Slack", "shape": "dot", "size": 7, "title": "Slack | Degree 7"}, {"font": {"color": "white"}, "id": "Trello", "label": "Trello", "shape": "dot", "size": 6, "title": "Trello | Degree 6"}, {"font": {"color": "white"}, "id": "Microsoft Azure", "label": "Microsoft Azure", "shape": "dot", "size": 1, "title": "Microsoft Azure | Degree 1"}, {"font": {"color": "white"}, "id": "IPython/Jupyter", "label": "IPython/Jupyter", "shape": "dot", "size": 2, "title": "IPython/Jupyter | Degree 2"}, {"font": {"color": "white"}, "id": "PyCharm", "label": "PyCharm", "shape": "dot", "size": 6, "title": "PyCharm | Degree 6"}, {"font": {"color": "white"}, "id": "Vim", "label": "Vim", "shape": "dot", "size": 5, "title": "Vim | Degree 5"}, {"font": {"color": "white"}, "id": "Xcode", "label": "Xcode", "shape": "dot", "size": 1, "title": "Xcode | Degree 1"}]);
+        edges = new vis.DataSet([{"from": "Android Studio", "title": "Android Studio | Eclipse | Weight 5440", "to": "Eclipse", "value": 5440}, {"from": "Android Studio", "title": "Android Studio | IntelliJ | Weight 8464", "to": "IntelliJ", "value": 8464}, {"from": "Android Studio", "title": "Android Studio | NotepadPP | Weight 7294", "to": "NotepadPP", "value": 7294}, {"from": "Android Studio", "title": "Android Studio | Sublime Text | Weight 5379", "to": "Sublime Text", "value": 5379}, {"from": "Android Studio", "title": "Android Studio | Visual Studio | Weight 7833", "to": "Visual Studio", "value": 7833}, {"from": "Android Studio", "title": "Android Studio | Visual Studio Code | Weight 14199", "to": "Visual Studio Code", "value": 14199}, {"from": "Eclipse", "title": "Eclipse | IntelliJ | Weight 6386", "to": "IntelliJ", "value": 6386}, {"from": "Eclipse", "title": "Eclipse | NotepadPP | Weight 7460", "to": "NotepadPP", "value": 7460}, {"from": "Eclipse", "title": "Eclipse | Visual Studio | Weight 5891", "to": "Visual Studio", "value": 5891}, {"from": "Eclipse", "title": "Eclipse | Visual Studio Code | Weight 9685", "to": "Visual Studio Code", "value": 9685}, {"from": "IntelliJ", "title": "IntelliJ | NotepadPP | Weight 8126", "to": "NotepadPP", "value": 8126}, {"from": "IntelliJ", "title": "IntelliJ | PyCharm | Weight 7734", "to": "PyCharm", "value": 7734}, {"from": "IntelliJ", "title": "IntelliJ | Sublime Text | Weight 6330", "to": "Sublime Text", "value": 6330}, {"from": "IntelliJ", "title": "IntelliJ | Vim | Weight 7002", "to": "Vim", "value": 7002}, {"from": "IntelliJ", "title": "IntelliJ | Visual Studio | Weight 7178", "to": "Visual Studio", "value": 7178}, {"from": "IntelliJ", "title": "IntelliJ | Visual Studio Code | Weight 16505", "to": "Visual Studio Code", "value": 16505}, {"from": "NotepadPP", "title": "NotepadPP | PyCharm | Weight 5936", "to": "PyCharm", "value": 5936}, {"from": "NotepadPP", "title": "NotepadPP | Sublime Text | Weight 6352", "to": "Sublime Text", "value": 6352}, {"from": "NotepadPP", "title": "NotepadPP | Vim | Weight 5697", "to": "Vim", "value": 5697}, {"from": "NotepadPP", "title": "NotepadPP | Visual Studio | Weight 13225", "to": "Visual Studio", "value": 13225}, {"from": "NotepadPP", "title": "NotepadPP | Visual Studio Code | Weight 17999", "to": "Visual Studio Code", "value": 17999}, {"from": "Sublime Text", "title": "Sublime Text | PyCharm | Weight 5073", "to": "PyCharm", "value": 5073}, {"from": "Sublime Text", "title": "Sublime Text | Vim | Weight 5058", "to": "Vim", "value": 5058}, {"from": "Sublime Text", "title": "Sublime Text | Visual Studio | Weight 5848", "to": "Visual Studio", "value": 5848}, {"from": "Sublime Text", "title": "Sublime Text | Visual Studio Code | Weight 12157", "to": "Visual Studio Code", "value": 12157}, {"from": "Visual Studio", "title": "Visual Studio | PyCharm | Weight 5611", "to": "PyCharm", "value": 5611}, {"from": "Visual Studio", "title": "Visual Studio | Vim | Weight 5122", "to": "Vim", "value": 5122}, {"from": "Visual Studio", "title": "Visual Studio | Visual Studio Code | Weight 21575", "to": "Visual Studio Code", "value": 21575}, {"from": "Visual Studio Code", "title": "Visual Studio Code | Atom | Weight 7882", "to": "Atom", "value": 7882}, {"from": "Visual Studio Code", "title": "Visual Studio Code | IPython/Jupyter | Weight 7646", "to": "IPython/Jupyter", "value": 7646}, {"from": "Visual Studio Code", "title": "Visual Studio Code | PyCharm | Weight 11243", "to": "PyCharm", "value": 11243}, {"from": "Visual Studio Code", "title": "Visual Studio Code | Vim | Weight 13233", "to": "Vim", "value": 13233}, {"from": "Visual Studio Code", "title": "Visual Studio Code | Xcode | Weight 6991", "to": "Xcode", "value": 6991}, {"from": "Confluence", "title": "Confluence | Github | Weight 14094", "to": "Github", "value": 14094}, {"from": "Confluence", "title": "Confluence | Gitlab | Weight 7123", "to": "Gitlab", "value": 7123}, {"from": "Confluence", "title": "Confluence | Google Suite Docs, Meet, etc | Weight 8170", "to": "Google Suite Docs, Meet, etc", "value": 8170}, {"from": "Confluence", "title": "Confluence | Jira | Weight 15828", "to": "Jira", "value": 15828}, {"from": "Confluence", "title": "Confluence | Microsoft Teams | Weight 5724", "to": "Microsoft Teams", "value": 5724}, {"from": "Confluence", "title": "Confluence | Slack | Weight 11950", "to": "Slack", "value": 11950}, {"from": "Confluence", "title": "Confluence | Trello | Weight 5339", "to": "Trello", "value": 5339}, {"from": "Github", "title": "Github | Gitlab | Weight 16599", "to": "Gitlab", "value": 16599}, {"from": "Github", "title": "Github | Google Suite Docs, Meet, etc | Weight 19268", "to": "Google Suite Docs, Meet, etc", "value": 19268}, {"from": "Github", "title": "Github | Jira | Weight 20837", "to": "Jira", "value": 20837}, {"from": "Github", "title": "Github | Microsoft Azure | Weight 6327", "to": "Microsoft Azure", "value": 6327}, {"from": "Github", "title": "Github | Microsoft Teams | Weight 10621", "to": "Microsoft Teams", "value": 10621}, {"from": "Github", "title": "Github | Slack | Weight 24517", "to": "Slack", "value": 24517}, {"from": "Github", "title": "Github | Trello | Weight 13914", "to": "Trello", "value": 13914}, {"from": "Gitlab", "title": "Gitlab | Google Suite Docs, Meet, etc | Weight 9042", "to": "Google Suite Docs, Meet, etc", "value": 9042}, {"from": "Gitlab", "title": "Gitlab | Jira | Weight 10594", "to": "Jira", "value": 10594}, {"from": "Gitlab", "title": "Gitlab | Slack | Weight 11835", "to": "Slack", "value": 11835}, {"from": "Gitlab", "title": "Gitlab | Trello | Weight 7286", "to": "Trello", "value": 7286}, {"from": "Google Suite Docs, Meet, etc", "title": "Google Suite Docs, Meet, etc | Jira | Weight 11961", "to": "Jira", "value": 11961}, {"from": "Google Suite Docs, Meet, etc", "title": "Google Suite Docs, Meet, etc | Microsoft Teams | Weight 5033", "to": "Microsoft Teams", "value": 5033}, {"from": "Google Suite Docs, Meet, etc", "title": "Google Suite Docs, Meet, etc | Slack | Weight 15155", "to": "Slack", "value": 15155}, {"from": "Google Suite Docs, Meet, etc", "title": "Google Suite Docs, Meet, etc | Trello | Weight 8983", "to": "Trello", "value": 8983}, {"from": "Jira", "title": "Jira | Microsoft Teams | Weight 7734", "to": "Microsoft Teams", "value": 7734}, {"from": "Jira", "title": "Jira | Slack | Weight 17034", "to": "Slack", "value": 17034}, {"from": "Jira", "title": "Jira | Trello | Weight 8065", "to": "Trello", "value": 8065}, {"from": "Microsoft Teams", "title": "Microsoft Teams | Slack | Weight 6783", "to": "Slack", "value": 6783}, {"from": "Slack", "title": "Slack | Trello | Weight 10993", "to": "Trello", "value": 10993}, {"from": "IPython/Jupyter", "title": "IPython/Jupyter | PyCharm | Weight 5067", "to": "PyCharm", "value": 5067}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

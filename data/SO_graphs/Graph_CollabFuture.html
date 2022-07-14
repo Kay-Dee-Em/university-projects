@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Android Studio", "label": "Android Studio", "shape": "dot", "size": 1, "title": "Android Studio | Degree 1"}, {"font": {"color": "white"}, "id": "Visual Studio Code", "label": "Visual Studio Code", "shape": "dot", "size": 9, "title": "Visual Studio Code | Degree 9"}, {"font": {"color": "white"}, "id": "Confluence", "label": "Confluence", "shape": "dot", "size": 3, "title": "Confluence | Degree 3"}, {"font": {"color": "white"}, "id": "Github", "label": "Github", "shape": "dot", "size": 8, "title": "Github | Degree 8"}, {"font": {"color": "white"}, "id": "Jira", "label": "Jira", "shape": "dot", "size": 5, "title": "Jira | Degree 5"}, {"font": {"color": "white"}, "id": "Slack", "label": "Slack", "shape": "dot", "size": 6, "title": "Slack | Degree 6"}, {"font": {"color": "white"}, "id": "Gitlab", "label": "Gitlab", "shape": "dot", "size": 4, "title": "Gitlab | Degree 4"}, {"font": {"color": "white"}, "id": "Google Suite Docs, Meet, etc", "label": "Google Suite Docs, Meet, etc", "shape": "dot", "size": 4, "title": "Google Suite Docs, Meet, etc | Degree 4"}, {"font": {"color": "white"}, "id": "Microsoft Azure", "label": "Microsoft Azure", "shape": "dot", "size": 1, "title": "Microsoft Azure | Degree 1"}, {"font": {"color": "white"}, "id": "Microsoft Teams", "label": "Microsoft Teams", "shape": "dot", "size": 1, "title": "Microsoft Teams | Degree 1"}, {"font": {"color": "white"}, "id": "Trello", "label": "Trello", "shape": "dot", "size": 2, "title": "Trello | Degree 2"}, {"font": {"color": "white"}, "id": "IPython/Jupyter", "label": "IPython/Jupyter", "shape": "dot", "size": 1, "title": "IPython/Jupyter | Degree 1"}, {"font": {"color": "white"}, "id": "IntelliJ", "label": "IntelliJ", "shape": "dot", "size": 2, "title": "IntelliJ | Degree 2"}, {"font": {"color": "white"}, "id": "PyCharm", "label": "PyCharm", "shape": "dot", "size": 2, "title": "PyCharm | Degree 2"}, {"font": {"color": "white"}, "id": "NotepadPP", "label": "NotepadPP", "shape": "dot", "size": 2, "title": "NotepadPP | Degree 2"}, {"font": {"color": "white"}, "id": "Visual Studio", "label": "Visual Studio", "shape": "dot", "size": 2, "title": "Visual Studio | Degree 2"}, {"font": {"color": "white"}, "id": "Sublime Text", "label": "Sublime Text", "shape": "dot", "size": 1, "title": "Sublime Text | Degree 1"}, {"font": {"color": "white"}, "id": "Vim", "label": "Vim", "shape": "dot", "size": 1, "title": "Vim | Degree 1"}, {"font": {"color": "white"}, "id": "Xcode", "label": "Xcode", "shape": "dot", "size": 1, "title": "Xcode | Degree 1"}]);
+        edges = new vis.DataSet([{"from": "Android Studio", "title": "Android Studio | Visual Studio Code | Weight 8331", "to": "Visual Studio Code", "value": 8331}, {"from": "Visual Studio Code", "title": "Visual Studio Code | IPython/Jupyter | Weight 5418", "to": "IPython/Jupyter", "value": 5418}, {"from": "Visual Studio Code", "title": "Visual Studio Code | IntelliJ | Weight 10685", "to": "IntelliJ", "value": 10685}, {"from": "Visual Studio Code", "title": "Visual Studio Code | NotepadPP | Weight 9485", "to": "NotepadPP", "value": 9485}, {"from": "Visual Studio Code", "title": "Visual Studio Code | PyCharm | Weight 6853", "to": "PyCharm", "value": 6853}, {"from": "Visual Studio Code", "title": "Visual Studio Code | Sublime Text | Weight 5678", "to": "Sublime Text", "value": 5678}, {"from": "Visual Studio Code", "title": "Visual Studio Code | Vim | Weight 9181", "to": "Vim", "value": 9181}, {"from": "Visual Studio Code", "title": "Visual Studio Code | Visual Studio | Weight 13406", "to": "Visual Studio", "value": 13406}, {"from": "Visual Studio Code", "title": "Visual Studio Code | Xcode | Weight 5187", "to": "Xcode", "value": 5187}, {"from": "Confluence", "title": "Confluence | Github | Weight 7100", "to": "Github", "value": 7100}, {"from": "Confluence", "title": "Confluence | Jira | Weight 8055", "to": "Jira", "value": 8055}, {"from": "Confluence", "title": "Confluence | Slack | Weight 5521", "to": "Slack", "value": 5521}, {"from": "Github", "title": "Github | Gitlab | Weight 12996", "to": "Gitlab", "value": 12996}, {"from": "Github", "title": "Github | Google Suite Docs, Meet, etc | Weight 13477", "to": "Google Suite Docs, Meet, etc", "value": 13477}, {"from": "Github", "title": "Github | Jira | Weight 12383", "to": "Jira", "value": 12383}, {"from": "Github", "title": "Github | Microsoft Azure | Weight 5846", "to": "Microsoft Azure", "value": 5846}, {"from": "Github", "title": "Github | Microsoft Teams | Weight 6134", "to": "Microsoft Teams", "value": 6134}, {"from": "Github", "title": "Github | Slack | Weight 17652", "to": "Slack", "value": 17652}, {"from": "Github", "title": "Github | Trello | Weight 8224", "to": "Trello", "value": 8224}, {"from": "Jira", "title": "Jira | Gitlab | Weight 6304", "to": "Gitlab", "value": 6304}, {"from": "Jira", "title": "Jira | Google Suite Docs, Meet, etc | Weight 6235", "to": "Google Suite Docs, Meet, etc", "value": 6235}, {"from": "Jira", "title": "Jira | Slack | Weight 9206", "to": "Slack", "value": 9206}, {"from": "Slack", "title": "Slack | Gitlab | Weight 8182", "to": "Gitlab", "value": 8182}, {"from": "Slack", "title": "Slack | Google Suite Docs, Meet, etc | Weight 9675", "to": "Google Suite Docs, Meet, etc", "value": 9675}, {"from": "Slack", "title": "Slack | Trello | Weight 5963", "to": "Trello", "value": 5963}, {"from": "Gitlab", "title": "Gitlab | Google Suite Docs, Meet, etc | Weight 6187", "to": "Google Suite Docs, Meet, etc", "value": 6187}, {"from": "IntelliJ", "title": "IntelliJ | PyCharm | Weight 5116", "to": "PyCharm", "value": 5116}, {"from": "NotepadPP", "title": "NotepadPP | Visual Studio | Weight 6394", "to": "Visual Studio", "value": 6394}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

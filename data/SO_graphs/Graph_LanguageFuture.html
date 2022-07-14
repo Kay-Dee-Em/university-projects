@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Assembly", "label": "Assembly", "shape": "dot", "size": 7, "title": "Assembly | Degree 7"}, {"font": {"color": "white"}, "id": "C", "label": "C", "shape": "dot", "size": 15, "title": "C | Degree 15"}, {"font": {"color": "white"}, "id": "C#", "label": "C#", "shape": "dot", "size": 21, "title": "C# | Degree 21"}, {"font": {"color": "white"}, "id": "CPP", "label": "CPP", "shape": "dot", "size": 19, "title": "CPP | Degree 19"}, {"font": {"color": "white"}, "id": "Java", "label": "Java", "shape": "dot", "size": 22, "title": "Java | Degree 22"}, {"font": {"color": "white"}, "id": "JavaScript", "label": "JavaScript", "shape": "dot", "size": 26, "title": "JavaScript | Degree 26"}, {"font": {"color": "white"}, "id": "Python", "label": "Python", "shape": "dot", "size": 24, "title": "Python | Degree 24"}, {"font": {"color": "white"}, "id": "SQL", "label": "SQL", "shape": "dot", "size": 22, "title": "SQL | Degree 22"}, {"font": {"color": "white"}, "id": "Bash/Shell", "label": "Bash/Shell", "shape": "dot", "size": 16, "title": "Bash/Shell | Degree 16"}, {"font": {"color": "white"}, "id": "CSS", "label": "CSS", "shape": "dot", "size": 11, "title": "CSS | Degree 11"}, {"font": {"color": "white"}, "id": "Go", "label": "Go", "shape": "dot", "size": 21, "title": "Go | Degree 21"}, {"font": {"color": "white"}, "id": "HTML", "label": "HTML", "shape": "dot", "size": 11, "title": "HTML | Degree 11"}, {"font": {"color": "white"}, "id": "HTML/CSS", "label": "HTML/CSS", "shape": "dot", "size": 18, "title": "HTML/CSS | Degree 18"}, {"font": {"color": "white"}, "id": "Kotlin", "label": "Kotlin", "shape": "dot", "size": 16, "title": "Kotlin | Degree 16"}, {"font": {"color": "white"}, "id": "Node_js", "label": "Node_js", "shape": "dot", "size": 9, "title": "Node_js | Degree 9"}, {"font": {"color": "white"}, "id": "PHP", "label": "PHP", "shape": "dot", "size": 16, "title": "PHP | Degree 16"}, {"font": {"color": "white"}, "id": "Rust", "label": "Rust", "shape": "dot", "size": 16, "title": "Rust | Degree 16"}, {"font": {"color": "white"}, "id": "TypeScript", "label": "TypeScript", "shape": "dot", "size": 22, "title": "TypeScript | Degree 22"}, {"font": {"color": "white"}, "id": "Swift", "label": "Swift", "shape": "dot", "size": 15, "title": "Swift | Degree 15"}, {"font": {"color": "white"}, "id": "F#", "label": "F#", "shape": "dot", "size": 3, "title": "F# | Degree 3"}, {"font": {"color": "white"}, "id": "R", "label": "R", "shape": "dot", "size": 9, "title": "R | Degree 9"}, {"font": {"color": "white"}, "id": "Ruby", "label": "Ruby", "shape": "dot", "size": 12, "title": "Ruby | Degree 12"}, {"font": {"color": "white"}, "id": "Dart", "label": "Dart", "shape": "dot", "size": 8, "title": "Dart | Degree 8"}, {"font": {"color": "white"}, "id": "Scala", "label": "Scala", "shape": "dot", "size": 8, "title": "Scala | Degree 8"}, {"font": {"color": "white"}, "id": "Haskell", "label": "Haskell", "shape": "dot", "size": 3, "title": "Haskell | Degree 3"}, {"font": {"color": "white"}, "id": "Objective-C", "label": "Objective-C", "shape": "dot", "size": 3, "title": "Objective-C | Degree 3"}, {"font": {"color": "white"}, "id": "WebAssembly", "label": "WebAssembly", "shape": "dot", "size": 1, "title": "WebAssembly | Degree 1"}]);
+        edges = new vis.DataSet([{"from": "Assembly", "title": "Assembly | C | Weight 10418", "to": "C", "value": 10418}, {"from": "Assembly", "title": "Assembly | C# | Weight 5238", "to": "C#", "value": 5238}, {"from": "Assembly", "title": "Assembly | CPP | Weight 9685", "to": "CPP", "value": 9685}, {"from": "Assembly", "title": "Assembly | Java | Weight 5455", "to": "Java", "value": 5455}, {"from": "Assembly", "title": "Assembly | JavaScript | Weight 7079", "to": "JavaScript", "value": 7079}, {"from": "Assembly", "title": "Assembly | Python | Weight 9493", "to": "Python", "value": 9493}, {"from": "Assembly", "title": "Assembly | SQL | Weight 6015", "to": "SQL", "value": 6015}, {"from": "C", "title": "C | Bash/Shell | Weight 8361", "to": "Bash/Shell", "value": 8361}, {"from": "C", "title": "C | C# | Weight 12537", "to": "C#", "value": 12537}, {"from": "C", "title": "C | CPP | Weight 27579", "to": "CPP", "value": 27579}, {"from": "C", "title": "C | Go | Weight 10814", "to": "Go", "value": 10814}, {"from": "C", "title": "C | HTML/CSS | Weight 10529", "to": "HTML/CSS", "value": 10529}, {"from": "C", "title": "C | Java | Weight 14696", "to": "Java", "value": 14696}, {"from": "C", "title": "C | JavaScript | Weight 18883", "to": "JavaScript", "value": 18883}, {"from": "C", "title": "C | Kotlin | Weight 5958", "to": "Kotlin", "value": 5958}, {"from": "C", "title": "C | PHP | Weight 7478", "to": "PHP", "value": 7478}, {"from": "C", "title": "C | Python | Weight 25851", "to": "Python", "value": 25851}, {"from": "C", "title": "C | Rust | Weight 9888", "to": "Rust", "value": 9888}, {"from": "C", "title": "C | SQL | Weight 15761", "to": "SQL", "value": 15761}, {"from": "C", "title": "C | Swift | Weight 5514", "to": "Swift", "value": 5514}, {"from": "C", "title": "C | TypeScript | Weight 7890", "to": "TypeScript", "value": 7890}, {"from": "C#", "title": "C# | Bash/Shell | Weight 7901", "to": "Bash/Shell", "value": 7901}, {"from": "C#", "title": "C# | CPP | Weight 22222", "to": "CPP", "value": 22222}, {"from": "C#", "title": "C# | CSS | Weight 10567", "to": "CSS", "value": 10567}, {"from": "C#", "title": "C# | F# | Weight 8029", "to": "F#", "value": 8029}, {"from": "C#", "title": "C# | Go | Weight 13945", "to": "Go", "value": 13945}, {"from": "C#", "title": "C# | HTML | Weight 11166", "to": "HTML", "value": 11166}, {"from": "C#", "title": "C# | HTML/CSS | Weight 27866", "to": "HTML/CSS", "value": 27866}, {"from": "C#", "title": "C# | Java | Weight 21480", "to": "Java", "value": 21480}, {"from": "C#", "title": "C# | JavaScript | Weight 49464", "to": "JavaScript", "value": 49464}, {"from": "C#", "title": "C# | Kotlin | Weight 10357", "to": "Kotlin", "value": 10357}, {"from": "C#", "title": "C# | Node_js | Weight 6068", "to": "Node_js", "value": 6068}, {"from": "C#", "title": "C# | PHP | Weight 12200", "to": "PHP", "value": 12200}, {"from": "C#", "title": "C# | Python | Weight 34035", "to": "Python", "value": 34035}, {"from": "C#", "title": "C# | R | Weight 6431", "to": "R", "value": 6431}, {"from": "C#", "title": "C# | Ruby | Weight 6569", "to": "Ruby", "value": 6569}, {"from": "C#", "title": "C# | Rust | Weight 9632", "to": "Rust", "value": 9632}, {"from": "C#", "title": "C# | SQL | Weight 44323", "to": "SQL", "value": 44323}, {"from": "C#", "title": "C# | Swift | Weight 8859", "to": "Swift", "value": 8859}, {"from": "C#", "title": "C# | TypeScript | Weight 32357", "to": "TypeScript", "value": 32357}, {"from": "CPP", "title": "CPP | Bash/Shell | Weight 9999", "to": "Bash/Shell", "value": 9999}, {"from": "CPP", "title": "CPP | CSS | Weight 5560", "to": "CSS", "value": 5560}, {"from": "CPP", "title": "CPP | Go | Weight 14390", "to": "Go", "value": 14390}, {"from": "CPP", "title": "CPP | HTML | Weight 5902", "to": "HTML", "value": 5902}, {"from": "CPP", "title": "CPP | HTML/CSS | Weight 15851", "to": "HTML/CSS", "value": 15851}, {"from": "CPP", "title": "CPP | Java | Weight 22184", "to": "Java", "value": 22184}, {"from": "CPP", "title": "CPP | JavaScript | Weight 29316", "to": "JavaScript", "value": 29316}, {"from": "CPP", "title": "CPP | Kotlin | Weight 9027", "to": "Kotlin", "value": 9027}, {"from": "CPP", "title": "CPP | PHP | Weight 10620", "to": "PHP", "value": 10620}, {"from": "CPP", "title": "CPP | Python | Weight 38942", "to": "Python", "value": 38942}, {"from": "CPP", "title": "CPP | R | Weight 6517", "to": "R", "value": 6517}, {"from": "CPP", "title": "CPP | Ruby | Weight 6215", "to": "Ruby", "value": 6215}, {"from": "CPP", "title": "CPP | Rust | Weight 12648", "to": "Rust", "value": 12648}, {"from": "CPP", "title": "CPP | SQL | Weight 23270", "to": "SQL", "value": 23270}, {"from": "CPP", "title": "CPP | Swift | Weight 7849", "to": "Swift", "value": 7849}, {"from": "CPP", "title": "CPP | TypeScript | Weight 13263", "to": "TypeScript", "value": 13263}, {"from": "Java", "title": "Java | Bash/Shell | Weight 11322", "to": "Bash/Shell", "value": 11322}, {"from": "Java", "title": "Java | CSS | Weight 10239", "to": "CSS", "value": 10239}, {"from": "Java", "title": "Java | Dart | Weight 5065", "to": "Dart", "value": 5065}, {"from": "Java", "title": "Java | Go | Weight 17543", "to": "Go", "value": 17543}, {"from": "Java", "title": "Java | HTML | Weight 10895", "to": "HTML", "value": 10895}, {"from": "Java", "title": "Java | HTML/CSS | Weight 25371", "to": "HTML/CSS", "value": 25371}, {"from": "Java", "title": "Java | JavaScript | Weight 51396", "to": "JavaScript", "value": 51396}, {"from": "Java", "title": "Java | Kotlin | Weight 21950", "to": "Kotlin", "value": 21950}, {"from": "Java", "title": "Java | Node_js | Weight 6415", "to": "Node_js", "value": 6415}, {"from": "Java", "title": "Java | PHP | Weight 16148", "to": "PHP", "value": 16148}, {"from": "Java", "title": "Java | Python | Weight 43795", "to": "Python", "value": 43795}, {"from": "Java", "title": "Java | R | Weight 7270", "to": "R", "value": 7270}, {"from": "Java", "title": "Java | Ruby | Weight 8027", "to": "Ruby", "value": 8027}, {"from": "Java", "title": "Java | Rust | Weight 8603", "to": "Rust", "value": 8603}, {"from": "Java", "title": "Java | SQL | Weight 41367", "to": "SQL", "value": 41367}, {"from": "Java", "title": "Java | Scala | Weight 9131", "to": "Scala", "value": 9131}, {"from": "Java", "title": "Java | Swift | Weight 11516", "to": "Swift", "value": 11516}, {"from": "Java", "title": "Java | TypeScript | Weight 22608", "to": "TypeScript", "value": 22608}, {"from": "JavaScript", "title": "JavaScript | Bash/Shell | Weight 21148", "to": "Bash/Shell", "value": 21148}, {"from": "JavaScript", "title": "JavaScript | CSS | Weight 26037", "to": "CSS", "value": 26037}, {"from": "JavaScript", "title": "JavaScript | Dart | Weight 9367", "to": "Dart", "value": 9367}, {"from": "JavaScript", "title": "JavaScript | F# | Weight 5065", "to": "F#", "value": 5065}, {"from": "JavaScript", "title": "JavaScript | Go | Weight 34120", "to": "Go", "value": 34120}, {"from": "JavaScript", "title": "JavaScript | HTML | Weight 27065", "to": "HTML", "value": 27065}, {"from": "JavaScript", "title": "JavaScript | HTML/CSS | Weight 74780", "to": "HTML/CSS", "value": 74780}, {"from": "JavaScript", "title": "JavaScript | Haskell | Weight 5135", "to": "Haskell", "value": 5135}, {"from": "JavaScript", "title": "JavaScript | Kotlin | Weight 22012", "to": "Kotlin", "value": 22012}, {"from": "JavaScript", "title": "JavaScript | Node_js | Weight 20108", "to": "Node_js", "value": 20108}, {"from": "JavaScript", "title": "JavaScript | Objective-C | Weight 6017", "to": "Objective-C", "value": 6017}, {"from": "JavaScript", "title": "JavaScript | PHP | Weight 37300", "to": "PHP", "value": 37300}, {"from": "JavaScript", "title": "JavaScript | Python | Weight 77570", "to": "Python", "value": 77570}, {"from": "JavaScript", "title": "JavaScript | R | Weight 11866", "to": "R", "value": 11866}, {"from": "JavaScript", "title": "JavaScript | Ruby | Weight 17262", "to": "Ruby", "value": 17262}, {"from": "JavaScript", "title": "JavaScript | Rust | Weight 18502", "to": "Rust", "value": 18502}, {"from": "JavaScript", "title": "JavaScript | SQL | Weight 81333", "to": "SQL", "value": 81333}, {"from": "JavaScript", "title": "JavaScript | Scala | Weight 8994", "to": "Scala", "value": 8994}, {"from": "JavaScript", "title": "JavaScript | Swift | Weight 17953", "to": "Swift", "value": 17953}, {"from": "JavaScript", "title": "JavaScript | TypeScript | Weight 65834", "to": "TypeScript", "value": 65834}, {"from": "JavaScript", "title": "JavaScript | WebAssembly | Weight 5401", "to": "WebAssembly", "value": 5401}, {"from": "Python", "title": "Python | Bash/Shell | Weight 21404", "to": "Bash/Shell", "value": 21404}, {"from": "Python", "title": "Python | CSS | Weight 13740", "to": "CSS", "value": 13740}, {"from": "Python", "title": "Python | Dart | Weight 8337", "to": "Dart", "value": 8337}, {"from": "Python", "title": "Python | Go | Weight 36697", "to": "Go", "value": 36697}, {"from": "Python", "title": "Python | HTML | Weight 14490", "to": "HTML", "value": 14490}, {"from": "Python", "title": "Python | HTML/CSS | Weight 42169", "to": "HTML/CSS", "value": 42169}, {"from": "Python", "title": "Python | Haskell | Weight 6785", "to": "Haskell", "value": 6785}, {"from": "Python", "title": "Python | Kotlin | Weight 21587", "to": "Kotlin", "value": 21587}, {"from": "Python", "title": "Python | Node_js | Weight 11918", "to": "Node_js", "value": 11918}, {"from": "Python", "title": "Python | Objective-C | Weight 5422", "to": "Objective-C", "value": 5422}, {"from": "Python", "title": "Python | PHP | Weight 23213", "to": "PHP", "value": 23213}, {"from": "Python", "title": "Python | R | Weight 18364", "to": "R", "value": 18364}, {"from": "Python", "title": "Python | Ruby | Weight 15201", "to": "Ruby", "value": 15201}, {"from": "Python", "title": "Python | Rust | Weight 22952", "to": "Rust", "value": 22952}, {"from": "Python", "title": "Python | SQL | Weight 60941", "to": "SQL", "value": 60941}, {"from": "Python", "title": "Python | Scala | Weight 11513", "to": "Scala", "value": 11513}, {"from": "Python", "title": "Python | Swift | Weight 16084", "to": "Swift", "value": 16084}, {"from": "Python", "title": "Python | TypeScript | Weight 37893", "to": "TypeScript", "value": 37893}, {"from": "SQL", "title": "SQL | Bash/Shell | Weight 17635", "to": "Bash/Shell", "value": 17635}, {"from": "SQL", "title": "SQL | CSS | Weight 17603", "to": "CSS", "value": 17603}, {"from": "SQL", "title": "SQL | Dart | Weight 6199", "to": "Dart", "value": 6199}, {"from": "SQL", "title": "SQL | Go | Weight 24424", "to": "Go", "value": 24424}, {"from": "SQL", "title": "SQL | HTML | Weight 18499", "to": "HTML", "value": 18499}, {"from": "SQL", "title": "SQL | HTML/CSS | Weight 47901", "to": "HTML/CSS", "value": 47901}, {"from": "SQL", "title": "SQL | Kotlin | Weight 16595", "to": "Kotlin", "value": 16595}, {"from": "SQL", "title": "SQL | Node_js | Weight 10821", "to": "Node_js", "value": 10821}, {"from": "SQL", "title": "SQL | PHP | Weight 30882", "to": "PHP", "value": 30882}, {"from": "SQL", "title": "SQL | R | Weight 12797", "to": "R", "value": 12797}, {"from": "SQL", "title": "SQL | Ruby | Weight 12703", "to": "Ruby", "value": 12703}, {"from": "SQL", "title": "SQL | Rust | Weight 13484", "to": "Rust", "value": 13484}, {"from": "SQL", "title": "SQL | Scala | Weight 8369", "to": "Scala", "value": 8369}, {"from": "SQL", "title": "SQL | Swift | Weight 12227", "to": "Swift", "value": 12227}, {"from": "SQL", "title": "SQL | TypeScript | Weight 40391", "to": "TypeScript", "value": 40391}, {"from": "Bash/Shell", "title": "Bash/Shell | CSS | Weight 12181", "to": "CSS", "value": 12181}, {"from": "Bash/Shell", "title": "Bash/Shell | Go | Weight 10461", "to": "Go", "value": 10461}, {"from": "Bash/Shell", "title": "Bash/Shell | HTML | Weight 12710", "to": "HTML", "value": 12710}, {"from": "Bash/Shell", "title": "Bash/Shell | HTML/CSS | Weight 6800", "to": "HTML/CSS", "value": 6800}, {"from": "Bash/Shell", "title": "Bash/Shell | Kotlin | Weight 5817", "to": "Kotlin", "value": 5817}, {"from": "Bash/Shell", "title": "Bash/Shell | Node_js | Weight 5345", "to": "Node_js", "value": 5345}, {"from": "Bash/Shell", "title": "Bash/Shell | PHP | Weight 6715", "to": "PHP", "value": 6715}, {"from": "Bash/Shell", "title": "Bash/Shell | Rust | Weight 6930", "to": "Rust", "value": 6930}, {"from": "Bash/Shell", "title": "Bash/Shell | TypeScript | Weight 10607", "to": "TypeScript", "value": 10607}, {"from": "CSS", "title": "CSS | Go | Weight 6002", "to": "Go", "value": 6002}, {"from": "CSS", "title": "CSS | HTML | Weight 29399", "to": "HTML", "value": 29399}, {"from": "CSS", "title": "CSS | PHP | Weight 9191", "to": "PHP", "value": 9191}, {"from": "CSS", "title": "CSS | TypeScript | Weight 10533", "to": "TypeScript", "value": 10533}, {"from": "Go", "title": "Go | Dart | Weight 6508", "to": "Dart", "value": 6508}, {"from": "Go", "title": "Go | HTML | Weight 6260", "to": "HTML", "value": 6260}, {"from": "Go", "title": "Go | HTML/CSS | Weight 16943", "to": "HTML/CSS", "value": 16943}, {"from": "Go", "title": "Go | Kotlin | Weight 14146", "to": "Kotlin", "value": 14146}, {"from": "Go", "title": "Go | Node_js | Weight 6248", "to": "Node_js", "value": 6248}, {"from": "Go", "title": "Go | PHP | Weight 8920", "to": "PHP", "value": 8920}, {"from": "Go", "title": "Go | R | Weight 6880", "to": "R", "value": 6880}, {"from": "Go", "title": "Go | Ruby | Weight 9097", "to": "Ruby", "value": 9097}, {"from": "Go", "title": "Go | Rust | Weight 17970", "to": "Rust", "value": 17970}, {"from": "Go", "title": "Go | Scala | Weight 7577", "to": "Scala", "value": 7577}, {"from": "Go", "title": "Go | Swift | Weight 9180", "to": "Swift", "value": 9180}, {"from": "Go", "title": "Go | TypeScript | Weight 23308", "to": "TypeScript", "value": 23308}, {"from": "HTML", "title": "HTML | PHP | Weight 9440", "to": "PHP", "value": 9440}, {"from": "HTML", "title": "HTML | TypeScript | Weight 10938", "to": "TypeScript", "value": 10938}, {"from": "HTML/CSS", "title": "HTML/CSS | Dart | Weight 7267", "to": "Dart", "value": 7267}, {"from": "HTML/CSS", "title": "HTML/CSS | Kotlin | Weight 12558", "to": "Kotlin", "value": 12558}, {"from": "HTML/CSS", "title": "HTML/CSS | Node_js | Weight 15315", "to": "Node_js", "value": 15315}, {"from": "HTML/CSS", "title": "HTML/CSS | PHP | Weight 21132", "to": "PHP", "value": 21132}, {"from": "HTML/CSS", "title": "HTML/CSS | R | Weight 5841", "to": "R", "value": 5841}, {"from": "HTML/CSS", "title": "HTML/CSS | Ruby | Weight 8149", "to": "Ruby", "value": 8149}, {"from": "HTML/CSS", "title": "HTML/CSS | Rust | Weight 11596", "to": "Rust", "value": 11596}, {"from": "HTML/CSS", "title": "HTML/CSS | Swift | Weight 8490", "to": "Swift", "value": 8490}, {"from": "HTML/CSS", "title": "HTML/CSS | TypeScript | Weight 40758", "to": "TypeScript", "value": 40758}, {"from": "Kotlin", "title": "Kotlin | Dart | Weight 6058", "to": "Dart", "value": 6058}, {"from": "Kotlin", "title": "Kotlin | PHP | Weight 6222", "to": "PHP", "value": 6222}, {"from": "Kotlin", "title": "Kotlin | Rust | Weight 9321", "to": "Rust", "value": 9321}, {"from": "Kotlin", "title": "Kotlin | Scala | Weight 5687", "to": "Scala", "value": 5687}, {"from": "Kotlin", "title": "Kotlin | Swift | Weight 10982", "to": "Swift", "value": 10982}, {"from": "Kotlin", "title": "Kotlin | TypeScript | Weight 15925", "to": "TypeScript", "value": 15925}, {"from": "Node_js", "title": "Node_js | TypeScript | Weight 15262", "to": "TypeScript", "value": 15262}, {"from": "PHP", "title": "PHP | Ruby | Weight 6168", "to": "Ruby", "value": 6168}, {"from": "PHP", "title": "PHP | Swift | Weight 6308", "to": "Swift", "value": 6308}, {"from": "PHP", "title": "PHP | TypeScript | Weight 13083", "to": "TypeScript", "value": 13083}, {"from": "Rust", "title": "Rust | Haskell | Weight 6102", "to": "Haskell", "value": 6102}, {"from": "Rust", "title": "Rust | Ruby | Weight 5512", "to": "Ruby", "value": 5512}, {"from": "Rust", "title": "Rust | Scala | Weight 5725", "to": "Scala", "value": 5725}, {"from": "Rust", "title": "Rust | Swift | Weight 5441", "to": "Swift", "value": 5441}, {"from": "Rust", "title": "Rust | TypeScript | Weight 16596", "to": "TypeScript", "value": 16596}, {"from": "TypeScript", "title": "TypeScript | Dart | Weight 7519", "to": "Dart", "value": 7519}, {"from": "TypeScript", "title": "TypeScript | F# | Weight 5494", "to": "F#", "value": 5494}, {"from": "TypeScript", "title": "TypeScript | R | Weight 6094", "to": "R", "value": 6094}, {"from": "TypeScript", "title": "TypeScript | Ruby | Weight 8357", "to": "Ruby", "value": 8357}, {"from": "TypeScript", "title": "TypeScript | Scala | Weight 6314", "to": "Scala", "value": 6314}, {"from": "TypeScript", "title": "TypeScript | Swift | Weight 10490", "to": "Swift", "value": 10490}, {"from": "Swift", "title": "Swift | Objective-C | Weight 6915", "to": "Objective-C", "value": 6915}, {"from": "Swift", "title": "Swift | Ruby | Weight 5856", "to": "Ruby", "value": 5856}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

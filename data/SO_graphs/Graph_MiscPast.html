@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Keras", "label": "Keras", "shape": "dot", "size": 2, "title": "Keras | Degree 2"}, {"font": {"color": "white"}, "id": "Pandas", "label": "Pandas", "shape": "dot", "size": 4, "title": "Pandas | Degree 4"}, {"font": {"color": "white"}, "id": "TensorFlow", "label": "TensorFlow", "shape": "dot", "size": 4, "title": "TensorFlow | Degree 4"}, {"font": {"color": "white"}, "id": "Node_js", "label": "Node_js", "shape": "dot", "size": 4, "title": "Node_js | Degree 4"}, {"font": {"color": "white"}, "id": "React Native", "label": "React Native", "shape": "dot", "size": 1, "title": "React Native | Degree 1"}, {"font": {"color": "white"}, "id": "Unity 3D", "label": "Unity 3D", "shape": "dot", "size": 1, "title": "Unity 3D | Degree 1"}, {"font": {"color": "white"}, "id": "_NET", "label": "_NET", "shape": "dot", "size": 2, "title": "_NET | Degree 2"}, {"font": {"color": "white"}, "id": "_NET Core", "label": "_NET Core", "shape": "dot", "size": 2, "title": "_NET Core | Degree 2"}, {"font": {"color": "white"}, "id": "NumPy", "label": "NumPy", "shape": "dot", "size": 2, "title": "NumPy | Degree 2"}, {"font": {"color": "white"}, "id": "Torch/PyTorch", "label": "Torch/PyTorch", "shape": "dot", "size": 2, "title": "Torch/PyTorch | Degree 2"}]);
+        edges = new vis.DataSet([{"from": "Keras", "title": "Keras | Pandas | Weight 5805", "to": "Pandas", "value": 5805}, {"from": "Keras", "title": "Keras | TensorFlow | Weight 6283", "to": "TensorFlow", "value": 6283}, {"from": "Pandas", "title": "Pandas | NumPy | Weight 12018", "to": "NumPy", "value": 12018}, {"from": "Pandas", "title": "Pandas | TensorFlow | Weight 10752", "to": "TensorFlow", "value": 10752}, {"from": "Pandas", "title": "Pandas | Torch/PyTorch | Weight 5800", "to": "Torch/PyTorch", "value": 5800}, {"from": "TensorFlow", "title": "TensorFlow | NumPy | Weight 6316", "to": "NumPy", "value": 6316}, {"from": "TensorFlow", "title": "TensorFlow | Torch/PyTorch | Weight 6206", "to": "Torch/PyTorch", "value": 6206}, {"from": "Node_js", "title": "Node_js | React Native | Weight 7824", "to": "React Native", "value": 7824}, {"from": "Node_js", "title": "Node_js | Unity 3D | Weight 5062", "to": "Unity 3D", "value": 5062}, {"from": "Node_js", "title": "Node_js | _NET | Weight 12907", "to": "_NET", "value": 12907}, {"from": "Node_js", "title": "Node_js | _NET Core | Weight 10379", "to": "_NET Core", "value": 10379}, {"from": "_NET", "title": "_NET | _NET Core | Weight 21101", "to": "_NET Core", "value": 21101}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

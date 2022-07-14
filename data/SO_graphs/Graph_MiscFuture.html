@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Apache Spark", "label": "Apache Spark", "shape": "dot", "size": 3, "title": "Apache Spark | Degree 3"}, {"font": {"color": "white"}, "id": "Hadoop", "label": "Hadoop", "shape": "dot", "size": 3, "title": "Hadoop | Degree 3"}, {"font": {"color": "white"}, "id": "Pandas", "label": "Pandas", "shape": "dot", "size": 8, "title": "Pandas | Degree 8"}, {"font": {"color": "white"}, "id": "TensorFlow", "label": "TensorFlow", "shape": "dot", "size": 11, "title": "TensorFlow | Degree 11"}, {"font": {"color": "white"}, "id": "Flutter", "label": "Flutter", "shape": "dot", "size": 3, "title": "Flutter | Degree 3"}, {"font": {"color": "white"}, "id": "Node_js", "label": "Node_js", "shape": "dot", "size": 8, "title": "Node_js | Degree 8"}, {"font": {"color": "white"}, "id": "React Native", "label": "React Native", "shape": "dot", "size": 6, "title": "React Native | Degree 6"}, {"font": {"color": "white"}, "id": "Keras", "label": "Keras", "shape": "dot", "size": 3, "title": "Keras | Degree 3"}, {"font": {"color": "white"}, "id": "Torch/PyTorch", "label": "Torch/PyTorch", "shape": "dot", "size": 4, "title": "Torch/PyTorch | Degree 4"}, {"font": {"color": "white"}, "id": "Unity 3D", "label": "Unity 3D", "shape": "dot", "size": 6, "title": "Unity 3D | Degree 6"}, {"font": {"color": "white"}, "id": "Unreal Engine", "label": "Unreal Engine", "shape": "dot", "size": 2, "title": "Unreal Engine | Degree 2"}, {"font": {"color": "white"}, "id": "_NET", "label": "_NET", "shape": "dot", "size": 4, "title": "_NET | Degree 4"}, {"font": {"color": "white"}, "id": "_NET Core", "label": "_NET Core", "shape": "dot", "size": 6, "title": "_NET Core | Degree 6"}, {"font": {"color": "white"}, "id": "NumPy", "label": "NumPy", "shape": "dot", "size": 3, "title": "NumPy | Degree 3"}, {"font": {"color": "white"}, "id": "Xamarin", "label": "Xamarin", "shape": "dot", "size": 2, "title": "Xamarin | Degree 2"}]);
+        edges = new vis.DataSet([{"from": "Apache Spark", "title": "Apache Spark | Hadoop | Weight 6610", "to": "Hadoop", "value": 6610}, {"from": "Apache Spark", "title": "Apache Spark | Pandas | Weight 6096", "to": "Pandas", "value": 6096}, {"from": "Apache Spark", "title": "Apache Spark | TensorFlow | Weight 7506", "to": "TensorFlow", "value": 7506}, {"from": "Hadoop", "title": "Hadoop | Pandas | Weight 5358", "to": "Pandas", "value": 5358}, {"from": "Hadoop", "title": "Hadoop | TensorFlow | Weight 7163", "to": "TensorFlow", "value": 7163}, {"from": "Pandas", "title": "Pandas | Keras | Weight 6450", "to": "Keras", "value": 6450}, {"from": "Pandas", "title": "Pandas | Node_js | Weight 5860", "to": "Node_js", "value": 5860}, {"from": "Pandas", "title": "Pandas | NumPy | Weight 9608", "to": "NumPy", "value": 9608}, {"from": "Pandas", "title": "Pandas | React Native | Weight 5103", "to": "React Native", "value": 5103}, {"from": "Pandas", "title": "Pandas | TensorFlow | Weight 16547", "to": "TensorFlow", "value": 16547}, {"from": "Pandas", "title": "Pandas | Torch/PyTorch | Weight 11232", "to": "Torch/PyTorch", "value": 11232}, {"from": "TensorFlow", "title": "TensorFlow | Flutter | Weight 9180", "to": "Flutter", "value": 9180}, {"from": "TensorFlow", "title": "TensorFlow | Keras | Weight 7785", "to": "Keras", "value": 7785}, {"from": "TensorFlow", "title": "TensorFlow | Node_js | Weight 13843", "to": "Node_js", "value": 13843}, {"from": "TensorFlow", "title": "TensorFlow | NumPy | Weight 7322", "to": "NumPy", "value": 7322}, {"from": "TensorFlow", "title": "TensorFlow | React Native | Weight 11117", "to": "React Native", "value": 11117}, {"from": "TensorFlow", "title": "TensorFlow | Torch/PyTorch | Weight 15293", "to": "Torch/PyTorch", "value": 15293}, {"from": "TensorFlow", "title": "TensorFlow | Unity 3D | Weight 6159", "to": "Unity 3D", "value": 6159}, {"from": "TensorFlow", "title": "TensorFlow | _NET Core | Weight 5632", "to": "_NET Core", "value": 5632}, {"from": "Flutter", "title": "Flutter | Node_js | Weight 8337", "to": "Node_js", "value": 8337}, {"from": "Flutter", "title": "Flutter | React Native | Weight 9280", "to": "React Native", "value": 9280}, {"from": "Node_js", "title": "Node_js | React Native | Weight 17541", "to": "React Native", "value": 17541}, {"from": "Node_js", "title": "Node_js | Unity 3D | Weight 9105", "to": "Unity 3D", "value": 9105}, {"from": "Node_js", "title": "Node_js | Unreal Engine | Weight 5339", "to": "Unreal Engine", "value": 5339}, {"from": "Node_js", "title": "Node_js | _NET | Weight 10244", "to": "_NET", "value": 10244}, {"from": "Node_js", "title": "Node_js | _NET Core | Weight 12522", "to": "_NET Core", "value": 12522}, {"from": "React Native", "title": "React Native | Unity 3D | Weight 5161", "to": "Unity 3D", "value": 5161}, {"from": "React Native", "title": "React Native | _NET Core | Weight 5437", "to": "_NET Core", "value": 5437}, {"from": "Keras", "title": "Keras | Torch/PyTorch | Weight 5302", "to": "Torch/PyTorch", "value": 5302}, {"from": "Torch/PyTorch", "title": "Torch/PyTorch | NumPy | Weight 5964", "to": "NumPy", "value": 5964}, {"from": "Unity 3D", "title": "Unity 3D | Unreal Engine | Weight 7626", "to": "Unreal Engine", "value": 7626}, {"from": "Unity 3D", "title": "Unity 3D | _NET | Weight 5861", "to": "_NET", "value": 5861}, {"from": "Unity 3D", "title": "Unity 3D | _NET Core | Weight 6004", "to": "_NET Core", "value": 6004}, {"from": "_NET", "title": "_NET | Xamarin | Weight 5806", "to": "Xamarin", "value": 5806}, {"from": "_NET", "title": "_NET | _NET Core | Weight 18089", "to": "_NET Core", "value": 18089}, {"from": "_NET Core", "title": "_NET Core | Xamarin | Weight 6641", "to": "Xamarin", "value": 6641}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

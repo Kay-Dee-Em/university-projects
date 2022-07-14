@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "AWS", "label": "AWS", "shape": "dot", "size": 16, "title": "AWS | Degree 16"}, {"font": {"color": "white"}, "id": "Android", "label": "Android", "shape": "dot", "size": 14, "title": "Android | Degree 14"}, {"font": {"color": "white"}, "id": "Arduino", "label": "Arduino", "shape": "dot", "size": 9, "title": "Arduino | Degree 9"}, {"font": {"color": "white"}, "id": "DigitalOcean", "label": "DigitalOcean", "shape": "dot", "size": 1, "title": "DigitalOcean | Degree 1"}, {"font": {"color": "white"}, "id": "Docker", "label": "Docker", "shape": "dot", "size": 13, "title": "Docker | Degree 13"}, {"font": {"color": "white"}, "id": "Google Cloud Platform", "label": "Google Cloud Platform", "shape": "dot", "size": 12, "title": "Google Cloud Platform | Degree 12"}, {"font": {"color": "white"}, "id": "Heroku", "label": "Heroku", "shape": "dot", "size": 8, "title": "Heroku | Degree 8"}, {"font": {"color": "white"}, "id": "IBM Cloud or Watson", "label": "IBM Cloud or Watson", "shape": "dot", "size": 1, "title": "IBM Cloud or Watson | Degree 1"}, {"font": {"color": "white"}, "id": "Kubernetes", "label": "Kubernetes", "shape": "dot", "size": 10, "title": "Kubernetes | Degree 10"}, {"font": {"color": "white"}, "id": "Linux", "label": "Linux", "shape": "dot", "size": 14, "title": "Linux | Degree 14"}, {"font": {"color": "white"}, "id": "MacOS", "label": "MacOS", "shape": "dot", "size": 14, "title": "MacOS | Degree 14"}, {"font": {"color": "white"}, "id": "Microsoft Azure", "label": "Microsoft Azure", "shape": "dot", "size": 11, "title": "Microsoft Azure | Degree 11"}, {"font": {"color": "white"}, "id": "Raspberry Pi", "label": "Raspberry Pi", "shape": "dot", "size": 13, "title": "Raspberry Pi | Degree 13"}, {"font": {"color": "white"}, "id": "Slack", "label": "Slack", "shape": "dot", "size": 6, "title": "Slack | Degree 6"}, {"font": {"color": "white"}, "id": "Windows", "label": "Windows", "shape": "dot", "size": 13, "title": "Windows | Degree 13"}, {"font": {"color": "white"}, "id": "WordPress", "label": "WordPress", "shape": "dot", "size": 7, "title": "WordPress | Degree 7"}, {"font": {"color": "white"}, "id": "iOS", "label": "iOS", "shape": "dot", "size": 11, "title": "iOS | Degree 11"}, {"font": {"color": "white"}, "id": "Firebase", "label": "Firebase", "shape": "dot", "size": 1, "title": "Firebase | Degree 1"}]);
+        edges = new vis.DataSet([{"from": "AWS", "title": "AWS | Android | Weight 19700", "to": "Android", "value": 19700}, {"from": "AWS", "title": "AWS | Arduino | Weight 10208", "to": "Arduino", "value": 10208}, {"from": "AWS", "title": "AWS | DigitalOcean | Weight 5181", "to": "DigitalOcean", "value": 5181}, {"from": "AWS", "title": "AWS | Docker | Weight 29288", "to": "Docker", "value": 29288}, {"from": "AWS", "title": "AWS | Google Cloud Platform | Weight 26317", "to": "Google Cloud Platform", "value": 26317}, {"from": "AWS", "title": "AWS | Heroku | Weight 15266", "to": "Heroku", "value": 15266}, {"from": "AWS", "title": "AWS | IBM Cloud or Watson | Weight 5429", "to": "IBM Cloud or Watson", "value": 5429}, {"from": "AWS", "title": "AWS | Kubernetes | Weight 17531", "to": "Kubernetes", "value": 17531}, {"from": "AWS", "title": "AWS | Linux | Weight 36910", "to": "Linux", "value": 36910}, {"from": "AWS", "title": "AWS | MacOS | Weight 18072", "to": "MacOS", "value": 18072}, {"from": "AWS", "title": "AWS | Microsoft Azure | Weight 18572", "to": "Microsoft Azure", "value": 18572}, {"from": "AWS", "title": "AWS | Raspberry Pi | Weight 17047", "to": "Raspberry Pi", "value": 17047}, {"from": "AWS", "title": "AWS | Slack | Weight 7617", "to": "Slack", "value": 7617}, {"from": "AWS", "title": "AWS | Windows | Weight 13148", "to": "Windows", "value": 13148}, {"from": "AWS", "title": "AWS | WordPress | Weight 5800", "to": "WordPress", "value": 5800}, {"from": "AWS", "title": "AWS | iOS | Weight 13003", "to": "iOS", "value": 13003}, {"from": "Android", "title": "Android | Arduino | Weight 17170", "to": "Arduino", "value": 17170}, {"from": "Android", "title": "Android | Docker | Weight 15407", "to": "Docker", "value": 15407}, {"from": "Android", "title": "Android | Firebase | Weight 6534", "to": "Firebase", "value": 6534}, {"from": "Android", "title": "Android | Google Cloud Platform | Weight 10775", "to": "Google Cloud Platform", "value": 10775}, {"from": "Android", "title": "Android | Heroku | Weight 6919", "to": "Heroku", "value": 6919}, {"from": "Android", "title": "Android | Kubernetes | Weight 8019", "to": "Kubernetes", "value": 8019}, {"from": "Android", "title": "Android | Linux | Weight 30786", "to": "Linux", "value": 30786}, {"from": "Android", "title": "Android | MacOS | Weight 16944", "to": "MacOS", "value": 16944}, {"from": "Android", "title": "Android | Microsoft Azure | Weight 8830", "to": "Microsoft Azure", "value": 8830}, {"from": "Android", "title": "Android | Raspberry Pi | Weight 22982", "to": "Raspberry Pi", "value": 22982}, {"from": "Android", "title": "Android | Windows | Weight 17396", "to": "Windows", "value": 17396}, {"from": "Android", "title": "Android | WordPress | Weight 8917", "to": "WordPress", "value": 8917}, {"from": "Android", "title": "Android | iOS | Weight 28017", "to": "iOS", "value": 28017}, {"from": "Arduino", "title": "Arduino | Docker | Weight 8528", "to": "Docker", "value": 8528}, {"from": "Arduino", "title": "Arduino | Google Cloud Platform | Weight 5211", "to": "Google Cloud Platform", "value": 5211}, {"from": "Arduino", "title": "Arduino | Linux | Weight 17446", "to": "Linux", "value": 17446}, {"from": "Arduino", "title": "Arduino | MacOS | Weight 8281", "to": "MacOS", "value": 8281}, {"from": "Arduino", "title": "Arduino | Raspberry Pi | Weight 21192", "to": "Raspberry Pi", "value": 21192}, {"from": "Arduino", "title": "Arduino | Windows | Weight 7571", "to": "Windows", "value": 7571}, {"from": "Arduino", "title": "Arduino | iOS | Weight 8853", "to": "iOS", "value": 8853}, {"from": "Docker", "title": "Docker | Google Cloud Platform | Weight 16776", "to": "Google Cloud Platform", "value": 16776}, {"from": "Docker", "title": "Docker | Heroku | Weight 7777", "to": "Heroku", "value": 7777}, {"from": "Docker", "title": "Docker | Kubernetes | Weight 26738", "to": "Kubernetes", "value": 26738}, {"from": "Docker", "title": "Docker | Linux | Weight 37114", "to": "Linux", "value": 37114}, {"from": "Docker", "title": "Docker | MacOS | Weight 15598", "to": "MacOS", "value": 15598}, {"from": "Docker", "title": "Docker | Microsoft Azure | Weight 11998", "to": "Microsoft Azure", "value": 11998}, {"from": "Docker", "title": "Docker | Raspberry Pi | Weight 15359", "to": "Raspberry Pi", "value": 15359}, {"from": "Docker", "title": "Docker | Slack | Weight 8998", "to": "Slack", "value": 8998}, {"from": "Docker", "title": "Docker | Windows | Weight 16675", "to": "Windows", "value": 16675}, {"from": "Docker", "title": "Docker | iOS | Weight 9210", "to": "iOS", "value": 9210}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | Heroku | Weight 8571", "to": "Heroku", "value": 8571}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | Kubernetes | Weight 12043", "to": "Kubernetes", "value": 12043}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | Linux | Weight 16646", "to": "Linux", "value": 16646}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | MacOS | Weight 8677", "to": "MacOS", "value": 8677}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | Microsoft Azure | Weight 13271", "to": "Microsoft Azure", "value": 13271}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | Raspberry Pi | Weight 7899", "to": "Raspberry Pi", "value": 7899}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | Windows | Weight 8853", "to": "Windows", "value": 8853}, {"from": "Google Cloud Platform", "title": "Google Cloud Platform | iOS | Weight 6754", "to": "iOS", "value": 6754}, {"from": "Heroku", "title": "Heroku | Linux | Weight 10630", "to": "Linux", "value": 10630}, {"from": "Heroku", "title": "Heroku | MacOS | Weight 6494", "to": "MacOS", "value": 6494}, {"from": "Heroku", "title": "Heroku | Microsoft Azure | Weight 5126", "to": "Microsoft Azure", "value": 5126}, {"from": "Heroku", "title": "Heroku | Raspberry Pi | Weight 5955", "to": "Raspberry Pi", "value": 5955}, {"from": "Kubernetes", "title": "Kubernetes | Linux | Weight 20846", "to": "Linux", "value": 20846}, {"from": "Kubernetes", "title": "Kubernetes | MacOS | Weight 8804", "to": "MacOS", "value": 8804}, {"from": "Kubernetes", "title": "Kubernetes | Microsoft Azure | Weight 8019", "to": "Microsoft Azure", "value": 8019}, {"from": "Kubernetes", "title": "Kubernetes | Raspberry Pi | Weight 8958", "to": "Raspberry Pi", "value": 8958}, {"from": "Kubernetes", "title": "Kubernetes | Slack | Weight 5284", "to": "Slack", "value": 5284}, {"from": "Kubernetes", "title": "Kubernetes | Windows | Weight 8325", "to": "Windows", "value": 8325}, {"from": "Linux", "title": "Linux | MacOS | Weight 27290", "to": "MacOS", "value": 27290}, {"from": "Linux", "title": "Linux | Microsoft Azure | Weight 10254", "to": "Microsoft Azure", "value": 10254}, {"from": "Linux", "title": "Linux | Raspberry Pi | Weight 30270", "to": "Raspberry Pi", "value": 30270}, {"from": "Linux", "title": "Linux | Slack | Weight 9300", "to": "Slack", "value": 9300}, {"from": "Linux", "title": "Linux | Windows | Weight 25302", "to": "Windows", "value": 25302}, {"from": "Linux", "title": "Linux | WordPress | Weight 8451", "to": "WordPress", "value": 8451}, {"from": "Linux", "title": "Linux | iOS | Weight 15916", "to": "iOS", "value": 15916}, {"from": "MacOS", "title": "MacOS | Microsoft Azure | Weight 5566", "to": "Microsoft Azure", "value": 5566}, {"from": "MacOS", "title": "MacOS | Raspberry Pi | Weight 13999", "to": "Raspberry Pi", "value": 13999}, {"from": "MacOS", "title": "MacOS | Slack | Weight 6137", "to": "Slack", "value": 6137}, {"from": "MacOS", "title": "MacOS | Windows | Weight 9565", "to": "Windows", "value": 9565}, {"from": "MacOS", "title": "MacOS | WordPress | Weight 5336", "to": "WordPress", "value": 5336}, {"from": "MacOS", "title": "MacOS | iOS | Weight 20475", "to": "iOS", "value": 20475}, {"from": "Microsoft Azure", "title": "Microsoft Azure | Raspberry Pi | Weight 7213", "to": "Raspberry Pi", "value": 7213}, {"from": "Microsoft Azure", "title": "Microsoft Azure | Windows | Weight 12110", "to": "Windows", "value": 12110}, {"from": "Microsoft Azure", "title": "Microsoft Azure | iOS | Weight 5794", "to": "iOS", "value": 5794}, {"from": "Raspberry Pi", "title": "Raspberry Pi | Windows | Weight 11372", "to": "Windows", "value": 11372}, {"from": "Raspberry Pi", "title": "Raspberry Pi | WordPress | Weight 5589", "to": "WordPress", "value": 5589}, {"from": "Raspberry Pi", "title": "Raspberry Pi | iOS | Weight 12906", "to": "iOS", "value": 12906}, {"from": "Slack", "title": "Slack | Windows | Weight 5041", "to": "Windows", "value": 5041}, {"from": "Windows", "title": "Windows | WordPress | Weight 5413", "to": "WordPress", "value": 5413}, {"from": "Windows", "title": "Windows | iOS | Weight 8582", "to": "iOS", "value": 8582}, {"from": "WordPress", "title": "WordPress | iOS | Weight 5522", "to": "iOS", "value": 5522}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

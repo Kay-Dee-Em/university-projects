@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "ASP_NET", "label": "ASP_NET", "shape": "dot", "size": 5, "title": "ASP_NET | Degree 5"}, {"font": {"color": "white"}, "id": "ASP_NET Core ", "label": "ASP_NET Core ", "shape": "dot", "size": 1, "title": "ASP_NET Core  | Degree 1"}, {"font": {"color": "white"}, "id": "Angular", "label": "Angular", "shape": "dot", "size": 10, "title": "Angular | Degree 10"}, {"font": {"color": "white"}, "id": "Express", "label": "Express", "shape": "dot", "size": 7, "title": "Express | Degree 7"}, {"font": {"color": "white"}, "id": "Vue_js", "label": "Vue_js", "shape": "dot", "size": 5, "title": "Vue_js | Degree 5"}, {"font": {"color": "white"}, "id": "jQuery", "label": "jQuery", "shape": "dot", "size": 10, "title": "jQuery | Degree 10"}, {"font": {"color": "white"}, "id": "Angular_js", "label": "Angular_js", "shape": "dot", "size": 2, "title": "Angular_js | Degree 2"}, {"font": {"color": "white"}, "id": "Django", "label": "Django", "shape": "dot", "size": 4, "title": "Django | Degree 4"}, {"font": {"color": "white"}, "id": "Node_js", "label": "Node_js", "shape": "dot", "size": 3, "title": "Node_js | Degree 3"}, {"font": {"color": "white"}, "id": "React", "label": "React", "shape": "dot", "size": 2, "title": "React | Degree 2"}, {"font": {"color": "white"}, "id": "Spring", "label": "Spring", "shape": "dot", "size": 3, "title": "Spring | Degree 3"}, {"font": {"color": "white"}, "id": "_NET Core", "label": "_NET Core", "shape": "dot", "size": 2, "title": "_NET Core | Degree 2"}, {"font": {"color": "white"}, "id": "Flask", "label": "Flask", "shape": "dot", "size": 3, "title": "Flask | Degree 3"}, {"font": {"color": "white"}, "id": "Laravel", "label": "Laravel", "shape": "dot", "size": 2, "title": "Laravel | Degree 2"}, {"font": {"color": "white"}, "id": "Ruby on Rails", "label": "Ruby on Rails", "shape": "dot", "size": 1, "title": "Ruby on Rails | Degree 1"}]);
+        edges = new vis.DataSet([{"from": "ASP_NET", "title": "ASP_NET | ASP_NET Core  | Weight 7039", "to": "ASP_NET Core ", "value": 7039}, {"from": "ASP_NET", "title": "ASP_NET | Angular | Weight 6405", "to": "Angular", "value": 6405}, {"from": "ASP_NET", "title": "ASP_NET | Express | Weight 5143", "to": "Express", "value": 5143}, {"from": "ASP_NET", "title": "ASP_NET | Vue_js | Weight 5238", "to": "Vue_js", "value": 5238}, {"from": "ASP_NET", "title": "ASP_NET | jQuery | Weight 20003", "to": "jQuery", "value": 20003}, {"from": "Angular", "title": "Angular | Angular_js | Weight 8416", "to": "Angular_js", "value": 8416}, {"from": "Angular", "title": "Angular | Django | Weight 5142", "to": "Django", "value": 5142}, {"from": "Angular", "title": "Angular | Express | Weight 7581", "to": "Express", "value": 7581}, {"from": "Angular", "title": "Angular | Node_js | Weight 11444", "to": "Node_js", "value": 11444}, {"from": "Angular", "title": "Angular | React | Weight 5376", "to": "React", "value": 5376}, {"from": "Angular", "title": "Angular | Spring | Weight 9404", "to": "Spring", "value": 9404}, {"from": "Angular", "title": "Angular | Vue_js | Weight 5035", "to": "Vue_js", "value": 5035}, {"from": "Angular", "title": "Angular | _NET Core | Weight 5218", "to": "_NET Core", "value": 5218}, {"from": "Angular", "title": "Angular | jQuery | Weight 10768", "to": "jQuery", "value": 10768}, {"from": "Express", "title": "Express | Django | Weight 5199", "to": "Django", "value": 5199}, {"from": "Express", "title": "Express | Flask | Weight 5742", "to": "Flask", "value": 5742}, {"from": "Express", "title": "Express | Spring | Weight 5256", "to": "Spring", "value": 5256}, {"from": "Express", "title": "Express | Vue_js | Weight 9602", "to": "Vue_js", "value": 9602}, {"from": "Express", "title": "Express | jQuery | Weight 15667", "to": "jQuery", "value": 15667}, {"from": "Vue_js", "title": "Vue_js | Laravel | Weight 7448", "to": "Laravel", "value": 7448}, {"from": "Vue_js", "title": "Vue_js | jQuery | Weight 14441", "to": "jQuery", "value": 14441}, {"from": "jQuery", "title": "jQuery | Angular_js | Weight 8337", "to": "Angular_js", "value": 8337}, {"from": "jQuery", "title": "jQuery | Django | Weight 9489", "to": "Django", "value": 9489}, {"from": "jQuery", "title": "jQuery | Flask | Weight 8238", "to": "Flask", "value": 8238}, {"from": "jQuery", "title": "jQuery | Laravel | Weight 11536", "to": "Laravel", "value": 11536}, {"from": "jQuery", "title": "jQuery | Ruby on Rails | Weight 5586", "to": "Ruby on Rails", "value": 5586}, {"from": "jQuery", "title": "jQuery | Spring | Weight 9923", "to": "Spring", "value": 9923}, {"from": "Django", "title": "Django | Flask | Weight 9087", "to": "Flask", "value": 9087}, {"from": "Node_js", "title": "Node_js | React | Weight 12968", "to": "React", "value": 12968}, {"from": "Node_js", "title": "Node_js | _NET Core | Weight 7381", "to": "_NET Core", "value": 7381}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
